@@ -32,7 +32,7 @@ Crates can only have 2 statuses:
 - Each pair will write code using TDD. One member of the pair will write a test that is expected to fail, and the other member will write code to make the test pass.
 
 ### Stories
-#### Get list of crates and their statuses
+#### STORY 1: Get list of crates and their statuses
 As a logistics manager, I want to retrieve a summary of all crates and their statuses so that I can quickly assess the overall state of shipments.
 
 **Acceptance Criteria:**
@@ -60,7 +60,7 @@ As a logistics manager, I want to retrieve a summary of all crates and their sta
 ]
 ```
 
-#### Add individual dogs to a crate
+#### STORY 2: Add individual dogs to a crate
 As a logistics manager, I want to add individual dogs to a crate based on their size and weight so that crates are efficiently utilized.
 
 **Acceptance Criteria:**
@@ -70,7 +70,7 @@ As a logistics manager, I want to add individual dogs to a crate based on their 
 4. If a crate already contains two "large" dogs and two "small" dogs, then the system should return an error indicating the crate is full.
 5. If the crate ID does not exist, then the system should return an error indicating the crate is invalid.
 
-#### Get crate and information about all contents
+#### STORY 3: Get crate and information about all contents
 As a logistics manager, I want to retrieve detailed information about a specific crate so that I can verify its contents and ensure proper organization.
 
 **Acceptance Criteria:**
@@ -104,14 +104,15 @@ As a logistics manager, I want to retrieve detailed information about a specific
 }
 ```
 
-#### Ship a crate
+#### STORY 4: Ship a crate
 As a logistics manager, I want to mark a crate as shipped so that it is no longer available for adding dogs or retrieving detailed information.
 
 **Acceptance Criteria:**
-1. Given a valid crate ID, when I mark the crate as shipped, then the system should update the crate's status to "Shipped."
-2. If the crate ID does not exist, then the system should return an error indicating the crate is invalid.
-3. If the crate is already marked as "Shipped," then the system should return an error indicating the crate has already been shipped.
-4. The system should return a summary of the crate, including its ID and status.
+1. Given a valid crate ID, when I mark the crate as shipped, then the system should first check if the crate is full (2 large and 2 small dogs). If the crate is full it will update the crate's status to "Shipped."
+2. If I try to ship a crate that is not full, I should get an error saying "The crate is not full"
+3. If the crate ID does not exist, then the system should return an error indicating the crate is invalid.
+4. If the crate is already marked as "Shipped," then the system should return an error indicating the crate has already been shipped.
+5. The system should return a summary of the crate, including its ID and status.
 
 **Example JSON Response:**
 ```json
