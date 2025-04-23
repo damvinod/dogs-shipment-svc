@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,16 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.dogs.shipment.entity.Dog;
 
 @SpringBootTest
+@DisplayName("Dog Repository Test")
 class DogRepositoryTest {
 
 	@Autowired
 	private DogRepository dogRepository;
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
+	@DisplayName("Should save when dog is created")
     void shouldSaveWhenDogIsCreated() {
 		// Create a new item
 		Dog dog = Dog.builder().name("I am a dog").weight(20.0).build();
@@ -32,6 +31,7 @@ class DogRepositoryTest {
 	}
 
 	@Test
+	@DisplayName("Get dog by ID should return the correct attributes")
     void getDogByIdShouldReturnAttributes() {
 		// Create a new item
 		Dog dog = Dog.builder().name("I am a dog").weight(20.0).build();
@@ -47,6 +47,7 @@ class DogRepositoryTest {
 	}
 
 	@Test
+	@DisplayName("Should throw exception when ID is updated")
     void shouldThrowExceptionWhenIdIsUpdated() {
 		// Create a new item
 		Dog dog = Dog.builder().name("I am a dog").weight(20.0).build();

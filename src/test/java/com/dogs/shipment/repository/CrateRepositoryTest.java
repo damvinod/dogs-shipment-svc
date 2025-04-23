@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,16 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.dogs.shipment.entity.Crate;
 
 @SpringBootTest
+@DisplayName("Crate Repository Test")
 class CrateRepositoryTest {
 
 	@Autowired
 	private CrateRepository crateRepository;
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
+	@DisplayName("Saving the crate should return the crate with ID")
     void shouldSaveWhenCrateIsCreated() {
 		// Create a new item
 		Crate crate = Crate.builder().name("I am a crate").status("Available").build();
@@ -32,6 +31,7 @@ class CrateRepositoryTest {
 	}
 
 	@Test
+	@DisplayName("Getting the crate by ID should return the correct attributes")
     void getCrateByIdShouldReturnAttributes() {
 		// Create a new crate
 		Crate crate = Crate.builder().name("I am a crate").status("Available").build();
@@ -47,6 +47,7 @@ class CrateRepositoryTest {
 	}
 
 	@Test
+	@DisplayName("Should throw exception when ID is updated")
     void shouldThrowExceptionWhenIdIsUpdated() {
 		// Create a new crate
 		Crate crate = Crate.builder().name("I am a crate").status("Available").build();
