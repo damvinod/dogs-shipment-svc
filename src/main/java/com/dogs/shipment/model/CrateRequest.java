@@ -7,5 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CrateRequest {
+
+    @NonNull
     String name;
 }
