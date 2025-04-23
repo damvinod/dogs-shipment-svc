@@ -1,15 +1,23 @@
 package com.dogs.shipment.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.dogs.shipment.entity.Crate;
+import com.dogs.shipment.model.CrateRequest;
+import com.dogs.shipment.service.CrateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/crates")
 public class CrateController {
 
-    //AddDogsToCrate
-    //GetCrateById
-    //GetAllCrates
-    //ShipCrate
+    @Autowired
+    private CrateService crateService;
 
-
-    //CreateCrates
+    @PostMapping
+    public ResponseEntity<Crate> createCrate(@RequestBody CrateRequest crateRequest) {
+        Crate createdCrate = crateService.createCrate(crateRequest.getName());
+        
+        return ResponseEntity.ok((createdCrate));
+    }
 }
