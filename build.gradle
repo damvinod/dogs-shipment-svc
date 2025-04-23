@@ -37,3 +37,11 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.register('downloadDependencies') {
+	doLast {
+		configurations.compileClasspath.files
+		configurations.runtimeClasspath.files
+		println 'Dependencies downloaded.'
+	}
+}
