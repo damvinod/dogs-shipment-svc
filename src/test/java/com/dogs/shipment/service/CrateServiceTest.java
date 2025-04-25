@@ -26,8 +26,8 @@ class CrateServiceTest {
     void shouldBeAbleToCreateACrate() {
         String crateName = "Test Crate";
 
-        Crate createdCrate = crateService.createCrate(crateName);
-        //crateService.createCrate(crateName);
+        //Crate createdCrate = crateService.createCrate(crateName);
+        crateService.createCrate(crateName);
 
         verify(crateRepository, times(1)).save(argThat(crate ->
             crate.getName().equals(crateName) && crate.getStatus().equals("Available")

@@ -4,10 +4,13 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class CrateRequest {
+public final class CrateRequest {
 
     @NonNull
     String name;
+
+    public CrateRequest() {
+        this.name = "";
+    }
 }
