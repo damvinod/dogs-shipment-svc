@@ -5,7 +5,7 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a
 
 ### Steps
 1. Clone the repository
-2. Make sure Java 23 is installed
+2. Make sure Java 21 is installed
 3. Build: ./gradlew build
 4. Test: ./gradlew test
 
