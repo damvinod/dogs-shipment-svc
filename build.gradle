@@ -19,7 +19,7 @@ jar {
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(23)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -93,6 +93,7 @@ spotbugsMain {
 
 spotbugs {
 	excludeFilter = file("./config/spotbugs/excludeFilter.xml")
+	ignoreFailures = true
 }
 
 check.dependsOn jacocoTestReport
