@@ -7,7 +7,10 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a
 1. Clone the repository
 2. Make sure Java 21 is installed
 3. Build: ./gradlew build
-4. Test: ./gradlew test
+
+#### Optional commands
+- Test: ./gradlew test
+- Build docker image: docker build -t dogs-shipment-svc:local .
 
 ## Introduction
 ### Scenario
