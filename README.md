@@ -7,6 +7,7 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a
 1. Clone the repository
 2. Make sure Java 21 is installed
 3. Build: `./gradlew build`
+4. Run the Application and can access swagger at `http://localhost:8080/swagger-ui/index.html`
 
 #### Optional commands
 - Test: `./gradlew test`
