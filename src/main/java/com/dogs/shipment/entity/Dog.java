@@ -1,5 +1,7 @@
 package com.dogs.shipment.entity;
 
+import com.dogs.shipment.model.Intelligence;
+import com.dogs.shipment.model.Shedding;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,12 +30,12 @@ public class Dog {
     private double weight;
 
     @Column(name = "INTELLIGENCE")
-    private String intelligence;
+    private Intelligence intelligence;
 
     @Column(name = "SHEDDING")
-    private String shedding;
+    private Shedding shedding;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "CRATE_ID")
     private Crate crate;
 
