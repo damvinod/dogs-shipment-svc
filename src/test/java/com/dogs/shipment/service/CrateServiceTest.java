@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
@@ -31,11 +32,11 @@ class CrateServiceTest {
         String crateName = "Test Crate";
 
         when(crateRepository.save(any(Crate.class)))
-                .thenReturn(Crate.builder().name(crateName).build());
+                .thenReturn(Crate.builder().crateId(1L).name(crateName).build());
 
-        //Crate createdCrate = crateService.createCrate(crateName);
+        //Long createdId = crateService.createCrate(crateName);
         crateService.createCrate(crateName);
 
-        //assertEquals(createdCrate.getName(), crateName);
+        //assertEquals(1L, createdId);
     }
 }

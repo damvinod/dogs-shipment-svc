@@ -43,8 +43,7 @@ public class CrateControllerTest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(crateRequest)))
                     .andExpect(status().isOk())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.crateId").isNumber())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test 1"));
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber());
         }
 
         @Test

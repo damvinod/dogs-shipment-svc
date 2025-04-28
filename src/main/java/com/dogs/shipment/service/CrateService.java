@@ -15,14 +15,14 @@ public class CrateService {
         this.crateRepository = crateRepository;
     }
 
-    public Crate createCrate(String name) {
+    public Long createCrate(String name) {
         Crate crate = Crate.builder()
                 .name(name)
                 .status(NOT_SHIPPED.getStatus())
                 .build();
 
-        crateRepository.save(crate);
+        crate = crateRepository.save(crate);
 
-        return crate;
+        return crate.getCrateId();
     }
 }
