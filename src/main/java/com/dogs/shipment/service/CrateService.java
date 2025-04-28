@@ -1,22 +1,28 @@
 package com.dogs.shipment.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.dogs.shipment.repository.CrateRepository;
 import com.dogs.shipment.entity.Crate;
+import com.dogs.shipment.repository.CrateRepository;
+import org.springframework.stereotype.Service;
+
+import static com.dogs.shipment.model.CrateStatus.NOT_SHIPPED;
 
 @Service
 public class CrateService {
 
-    @Autowired
     private CrateRepository crateRepository;
+
+    CrateService(CrateRepository crateRepository) {
+        this.crateRepository = crateRepository;
+    }
 
     public Crate createCrate(String name) {
         Crate crate = Crate.builder()
-        .name(name)
-        .status("Available")
-        .build();
+                .name(name)
+                .status(NOT_SHIPPED.getStatus())
+                .build();
+
         crateRepository.save(crate);
+
         return crate;
     }
 }

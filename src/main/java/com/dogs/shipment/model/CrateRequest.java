@@ -1,5 +1,10 @@
 package com.dogs.shipment.model;
-import lombok.*;
+
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -7,7 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public final class CrateRequest {
 
-    @NonNull
+
+    @NotEmpty(message = "Name is mandatory field")
     String name;
 
     public CrateRequest() {
