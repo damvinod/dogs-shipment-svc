@@ -1,4 +1,4 @@
-FROM gradle:8.13-jdk21 as build
+FROM gradle:8.14-jdk21 as build
 
 ARG GRADLE_CI_FLAGS=""
 ENV GRADLE_OPTS="-Xms64m -Xmx192m -Dorg.gradle.daemon=false"
