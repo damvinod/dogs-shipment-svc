@@ -35,7 +35,18 @@ Crates can only have 2 statuses:
 - Each pair will write code using TDD. One member of the pair will write a test that is expected to fail, and the other member will write code to make the test pass.
 
 ### Stories
-#### STORY 1: Get list of crates and their statuses
+#### STORY 1: Add individual dogs to a crate
+As a logistics manager, I want to add individual dogs to a crate based on their size and weight so that crates are efficiently utilized.
+
+**Acceptance Criteria:**
+1. Given an empty crate, when I add a dog weighing 20kg or more, then the dog should be added as a "large" dog.
+2. Given a crate with one "large" dog, when I add another dog weighing 20kg or more, then the second dog should also be added as a "large" dog.
+3. Given a crate with two "large" dogs, when I add a dog weighing less than 20kg, then the dog should be added as a "small" dog under one of the large dogs.
+4. If a crate already contains two "large" dogs and two "small" dogs, then the system should return an error indicating the crate is full.
+5. If the crate ID does not exist, then the system should return an error indicating the crate is invalid.
+
+
+#### STORY 2: Get list of crates and their statuses
 As a logistics manager, I want to retrieve a summary of all crates and their statuses so that I can quickly assess the overall state of shipments.
 
 **Acceptance Criteria:**
@@ -63,15 +74,6 @@ As a logistics manager, I want to retrieve a summary of all crates and their sta
 ]
 ```
 
-#### STORY 2: Add individual dogs to a crate
-As a logistics manager, I want to add individual dogs to a crate based on their size and weight so that crates are efficiently utilized.
-
-**Acceptance Criteria:**
-1. Given an empty crate, when I add a dog weighing 20kg or more, then the dog should be added as a "large" dog.
-2. Given a crate with one "large" dog, when I add another dog weighing 20kg or more, then the second dog should also be added as a "large" dog.
-3. Given a crate with two "large" dogs, when I add a dog weighing less than 20kg, then the dog should be added as a "small" dog under one of the large dogs.
-4. If a crate already contains two "large" dogs and two "small" dogs, then the system should return an error indicating the crate is full.
-5. If the crate ID does not exist, then the system should return an error indicating the crate is invalid.
 
 #### STORY 3: Get crate and information about all contents
 As a logistics manager, I want to retrieve detailed information about a specific crate so that I can verify its contents and ensure proper organization.
@@ -106,6 +108,7 @@ As a logistics manager, I want to retrieve detailed information about a specific
   "isFull": false
 }
 ```
+
 
 #### STORY 4: Ship a crate
 As a logistics manager, I want to mark a crate as shipped so that it is no longer available for adding dogs or retrieving detailed information.
