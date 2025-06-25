@@ -5,7 +5,7 @@ plugins {
 
 	// static checks
 	id 'jacoco'
-	id 'com.github.spotbugs' version '6.2.0'
+	id 'com.github.spotbugs' version '6.2.1'
 
 	id 'com.adarshr.test-logger' version '4.0.0'
 }
