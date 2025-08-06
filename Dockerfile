@@ -1,4 +1,4 @@
-FROM gradle:8.13-jdk21 as build
+FROM gradle:8.14.3-jdk24-alpine as build
 
 ARG GRADLE_CI_FLAGS=""
 ENV GRADLE_OPTS="-Xms64m -Xmx192m -Dorg.gradle.daemon=false"
@@ -11,7 +11,7 @@ RUN gradle -x check build ${GRADLE_CI_FLAGS} \
     && mkdir -p build/dependency \
     && unzip build/libs/*.jar -d build/dependency
 
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:24-jre-alpine
 
 # Change the default JVM DNS cache
 ARG JAVA_DNS_TTL_SECONDS=60
