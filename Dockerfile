@@ -18,7 +18,7 @@ RUN mkdir -p /home/gradle/app/otel && \
     curl -L -o /home/gradle/app/otel/aws-opentelemetry-agent.jar \
       https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/${OTEL_AGENT_VERSION}/aws-opentelemetry-agent.jar
 
-FROM eclipse-temurin:24-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 # Change the default JVM DNS cache
 ARG JAVA_DNS_TTL_SECONDS=60
