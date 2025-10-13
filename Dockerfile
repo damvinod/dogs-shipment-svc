@@ -11,6 +11,13 @@ RUN gradle -x check build ${GRADLE_CI_FLAGS} \
     && mkdir -p build/dependency \
     && unzip build/libs/*.jar -d build/dependency
 
+# Download the OpenTelemetry Java agent (AWS Distro) during build
+# Pin the version for reproducibility
+ARG OTEL_AGENT_VERSION=v2.11.5
+RUN mkdir -p /home/gradle/app/otel && \
+    curl -L -o /home/gradle/app/otel/aws-opentelemetry-agent.jar \
+      https://github.com/aws-observability/aws-otel-java-instrumentation/releases/download/${OTEL_AGENT_VERSION}/aws-opentelemetry-agent.jar
+
 FROM eclipse-temurin:24-jre-alpine
 
 # Change the default JVM DNS cache
@@ -28,6 +35,8 @@ ARG DEPENDENCY=/home/gradle/app/build/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app/classes
+COPY --from=build /home/gradle/app/otel /opt/otel
 
-ENTRYPOINT ["java","-cp","lib/*:classes","com.dogs.shipment.DogsShipmentSvcApplication"]
+ENTRYPOINT ["java", "-javaagent:/opt/otel/aws-opentelemetry-agent.jar", "-cp", "lib/*:classes", "com.dogs.shipment.DogsShipmentSvcApplication"]
+
 EXPOSE 8080
