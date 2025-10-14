@@ -92,21 +92,25 @@ module "dogs_shipment_svc" {
           value = var.environment
         },
         {
+          name = "OTEL_TRACES_EXPORTER",
+          value = "otlp"
+        },
+        {
           name  = "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"
           value = "http://localhost:4318/v1/traces"
         },
         {
-          name = "OTEL_TRACES_EXPORTER",
+          name = "OTEL_METRICS_EXPORTER",
           value = "otlp"
+        },
+        {
+          name = "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT"
+          value = "http://localhost:4318/v1/metrics"
         },
         {
           name = "OTEL_LOGS_EXPORTER",
           value = "none"
         },
-        {
-          name = "OTEL_METRICS_EXPORTER",
-          value = "none"
-        }
       ]
       dependsOn = [
         {

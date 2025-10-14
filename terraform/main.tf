@@ -21,6 +21,17 @@ locals {
       actions = ["xray:PutTraceSegments"]
       effect  = "Allow"
       resources = ["*"]
+    },
+    {
+      actions = [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams",
+        "logs:DescribeLogGroups"
+      ]
+      effect  = "Allow"
+      resources = ["*"]
     }
   ]
   task_exec_iam_statements = [

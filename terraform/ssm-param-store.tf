@@ -28,12 +28,21 @@ exporters:
   awsxray:
     region: 'us-east-1'
 
+  awsemf:
+    region: "us-east-1"
+    namespace: "SpringBoot/JVM"
+    dimension_rollup_option: "NoDimensionRollup"
+
 service:
   pipelines:
     traces:
       receivers: [otlp]
       processors: [filter/byCrates, batch]
       exporters: [awsxray]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [awsemf]
   extensions: [awsproxy, health_check]
 EOF
   tags = local.tags
