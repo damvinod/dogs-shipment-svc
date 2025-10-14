@@ -11,3 +11,7 @@ variable "environment" {
 variable "docker_image" {
   default = "vinodreddy25/dogs-shipment-svc:main"
 }
+
+variable "my_ip" {
+  default = "58.182.91.66/32"
+}
