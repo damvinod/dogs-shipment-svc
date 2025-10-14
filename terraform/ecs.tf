@@ -93,7 +93,7 @@ module "dogs_shipment_svc" {
         },
         {
           name = "OTEL_TRACES_EXPORTER",
-          value = "otlp"
+          value = var.otel_exporter
         },
         {
           name  = "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"
@@ -101,7 +101,7 @@ module "dogs_shipment_svc" {
         },
         {
           name = "OTEL_METRICS_EXPORTER",
-          value = "otlp"
+          value = var.otel_exporter
         },
         {
           name = "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT"
