@@ -19,6 +19,10 @@ receivers:
 
 processors:
   batch:
+  filter/byCrates:
+    traces:
+      span:
+        - 'attributes["http.route"] == "/actuator/health"'
 
 exporters:
   awsxray:
@@ -28,6 +32,7 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
+      processors: [filter/byCrates, batch]
       exporters: [awsxray]
   extensions: [awsproxy, health_check]
 EOF
