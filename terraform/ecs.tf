@@ -27,8 +27,8 @@ module "ecs" {
 module "dogs_shipment_svc" {
   source = "terraform-aws-modules/ecs/aws//modules/service"
 
-  cpu    = 256
-  memory = 512
+  cpu    = 512
+  memory = 1024
 
   name        = local.dogs_shipment_svc
   cluster_arn = module.ecs.cluster_arn
@@ -37,12 +37,43 @@ module "dogs_shipment_svc" {
   autoscaling_policies = {}
   enable_autoscaling   = false
   desired_count        = 1
+  health_check_grace_period_seconds = 180
 
   enable_execute_command    = true
   tasks_iam_role_statements = local.tasks_iam_role_statements
   task_exec_iam_statements  = local.task_exec_iam_statements
 
   container_definitions = {
+    otel-collector = {
+      cpu       = 256
+      memory    = 512
+      image = "otel/opentelemetry-collector-contrib"
+      portMappings = [
+        {
+          hostPorr = 2000
+          containerPort = 2000
+        },
+        {
+          containerPort = 4317
+          hostPort = 4317
+        },
+        {
+          containerPort = 4318
+          hostPort = 4318
+        },
+        {
+          containerPort = 13133
+          hostPort = 13133
+        }
+      ],
+      "command": ["--config", "env:SSM_CONFIG"],
+      "secrets": [
+        {
+          "name": "SSM_CONFIG",
+          "valueFrom": aws_ssm_parameter.otel_collector_config.name
+        }
+      ]
+    }
     dogs_svc = {
       cpu       = 256
       memory    = 512
@@ -59,12 +90,34 @@ module "dogs_shipment_svc" {
         {
           name  = "ENVIRONMENT"
           value = var.environment
+        },
+        {
+          name  = "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"
+          value = "http://localhost:4318/v1/traces"
+        },
+        {
+          name = "OTEL_TRACES_EXPORTER",
+          value = "otlp"
+        },
+        {
+          name = "OTEL_LOGS_EXPORTER",
+          value = "none"
+        },
+        {
+          name = "OTEL_METRICS_EXPORTER",
+          value = "none"
+        }
+      ]
+      dependsOn = [
+        {
+          containerName = "otel-collector"
+          condition     = "START"
         }
       ]
 
       healthCheck = {
         command      = ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
-        start_period = 10
+        startPeriod = 120
       }
 
       # Example image used requires access to write to root filesystem

@@ -16,6 +16,11 @@ locals {
       actions   = ["ecs:ExecuteCommand"]
       effect    = "Allow"
       resources = [module.ecs.cluster_arn]
+    },
+    {
+      actions = ["xray:PutTraceSegments"]
+      effect  = "Allow"
+      resources = ["*"]
     }
   ]
   task_exec_iam_statements = [
@@ -23,8 +28,14 @@ locals {
       actions   = ["logs:CreateLogGroup"]
       effect    = "Allow"
       resources = ["*"]
+    },
+    {
+      actions = ["ssm:GetParameter", "ssm:GetParameters"]
+      effect  = "Allow"
+      resources = [aws_ssm_parameter.otel_collector_config.arn]
     }
   ]
 }
 
 data "aws_availability_zones" "azs" {}
+
