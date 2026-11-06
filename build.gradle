@@ -42,7 +42,7 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1'
-    implementation 'io.micrometer:micrometer-tracing-bridge-otel:1.6.2'
+    implementation 'io.micrometer:micrometer-tracing-bridge-otel:1.6.5'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
